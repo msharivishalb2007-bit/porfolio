@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harivishal | Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --red:#ec1d24;
+    --ink:#0b0b10;
+    --paper:#e4dbdb;
+    /* OPTIONAL: put your own Marvel wallpaper here, e.g. url('images/marvel-bg.jpg') */
+    --hero-img:none;
+    /* OPTIONAL: per-card character images, e.g. url('images/ironman.jpg') */
+    --img-ironman:url('C:\\Users\\acer\\Desktop\\my profilio\\iron man.webp');
+    --img-cap:url('C:\\Users\\acer\\Desktop\\my profilio\\caption.webp');
+    --img-panther:url('C:\\Users\\acer\\Desktop\\my profilio\\black panther.webp');
+    --img-spidey:url('C:\\Users\\acer\\Desktop\\my profilio\\spider man.webp');
+    --img-hulk:url('C:\\Users\\acer\\Desktop\\my profilio\\hulk.webp');
+    --img-thor:url('C:\\Users\\acer\\Desktop\\my profilio\\thor.webp');
+}
+
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+
+body{
+    font-family:'Poppins',sans-serif;
+    color:var(--paper);
+    overflow-x:hidden;
+    background:
+        var(--hero-img),
+        radial-gradient(circle at 15% 10%, rgba(236,29,36,.35), transparent 45%),
+        radial-gradient(circle at 85% 90%, rgba(30,80,200,.3), transparent 45%),
+        #0b0b10;
+    background-size:cover;
+    background-attachment:fixed;
+}
+
+/* comic halftone dots over the whole page */
+body::before{
+    content:"";
+    position:fixed;inset:0;z-index:-1;
+    background-image:radial-gradient(rgba(255,255,255,.07) 1.2px, transparent 1.4px);
+    background-size:14px 14px;
+    pointer-events:none;
+}
+
+/* scroll progress bar */
+#progress{
+    position:fixed;top:0;left:0;height:4px;width:0;
+    background:linear-gradient(90deg,var(--red),#ffd34d);
+    z-index:2000;
+}
+
+header{
+    position:fixed;top:0;width:100%;
+    background:rgba(11,11,16,.85);
+    backdrop-filter:blur(10px);
+    display:flex;justify-content:space-between;align-items:center;
+    padding:16px 8%;
+    z-index:1000;
+    border-bottom:3px solid var(--red);
+}
+
+.logo{
+    font-family:'Bangers',cursive;
+    font-size:34px;letter-spacing:2px;
+    background:var(--red);color:#fff;
+    padding:2px 16px;
+    transform:skew(-8deg);
+    box-shadow:4px 4px 0 #000;
+}
+
+nav a{
+    color:#dcdcdc;text-decoration:none;margin-left:28px;
+    font-weight:600;position:relative;padding-bottom:4px;
+    transition:color .3s;
+}
+nav a::after{
+    content:"";position:absolute;left:0;bottom:0;height:3px;width:0;
+    background:var(--red);transition:width .3s;
+}
+nav a:hover{color:#fff}
+nav a:hover::after{width:100%}
+
+.hero{
+    min-height:100vh;
+    display:flex;justify-content:center;align-items:center;flex-direction:column;
+    text-align:center;padding:100px 20px 20px;
+}
+
+.hero h1{
+    font-family:'Bangers',cursive;
+    font-size:clamp(48px,9vw,96px);
+    letter-spacing:3px;line-height:1.05;margin-bottom:18px;
+    text-shadow:5px 5px 0 var(--red);
+    animation:slam .7s cubic-bezier(.2,1.4,.4,1) both;
+}
+.hero h1 span{color:#ffd34d}
+
+@keyframes slam{
+    from{opacity:0;transform:scale(2.2) rotate(-4deg)}
+    to{opacity:1;transform:scale(1) rotate(0)}
+}
+
+.hero p{
+    color:#d8d8d8;font-size:20px;max-width:700px;line-height:1.8;
+    animation:fadeUp .8s .5s both;
+}
+@keyframes fadeUp{
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:none}
+}
+
+/* ---------- Buttons ---------- */
+.btn{
+    position:relative;overflow:hidden;
+    margin-top:35px;display:inline-block;
+    font-family:'Bangers',cursive;font-size:24px;letter-spacing:2px;
+    background:var(--red);color:#fff;text-decoration:none;
+    padding:12px 40px;
+    border:3px solid #000;
+    transform:skew(-8deg);
+    box-shadow:6px 6px 0 #000;
+    transition:transform .2s, box-shadow .2s, background .3s;
+    animation:fadeUp .8s .8s both, pulse 2.4s 2s infinite;
+}
+.btn::before{
+    content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,.55),transparent);
+    transform:skew(20deg);
+}
+.btn:hover{
+    background:#ff3b42;
+    transform:skew(-8deg) translate(-3px,-3px);
+    box-shadow:10px 10px 0 #000;
+}
+.btn:hover::before{left:140%;transition:left .6s}
+.btn:active{transform:skew(-8deg) translate(4px,4px);box-shadow:2px 2px 0 #000}
+.btn:focus-visible,nav a:focus-visible{outline:3px solid #ffd34d;outline-offset:4px}
+
+@keyframes pulse{
+    0%,100%{box-shadow:6px 6px 0 #000, 0 0 0 0 rgba(236,29,36,.6)}
+    50%{box-shadow:6px 6px 0 #000, 0 0 0 16px rgba(236,29,36,0)}
+}
+
+section{padding:100px 8%}
+
+.section-title{
+    font-family:'Bangers',cursive;
+    text-align:center;font-size:52px;letter-spacing:3px;margin-bottom:50px;
+    text-shadow:4px 4px 0 var(--red);
+}
+
+/* ---------- Cards ---------- */
+.card{
+    position:relative;overflow:hidden;isolation:isolate;
+    background:rgba(15,15,22,.82);
+    border:2px solid rgba(255,255,255,.15);
+    border-left:6px solid var(--accent,var(--red));
+    border-radius:14px;
+    padding:30px;
+    backdrop-filter:blur(8px);
+    transition:transform .25s ease, box-shadow .3s, border-color .3s;
+    transform-style:preserve-3d;
+    will-change:transform;
+}
+/* character backdrop layer */
+.card::before{
+    content:"";position:absolute;inset:0;z-index:-1;
+    background:var(--theme, none);
+    background-size:cover;background-position:center;
+    opacity:.32;
+    transition:opacity .4s, transform .6s;
+}
+.card:hover{
+    box-shadow:0 18px 40px rgba(0,0,0,.6), 0 0 28px var(--accent,var(--red));
+    border-color:var(--accent,var(--red));
+}
+.card:hover::before{opacity:.55;transform:scale(1.08)}
+.card h3{font-family:'Bangers',cursive;font-size:30px;letter-spacing:2px}
+.card .tag{
+    display:inline-block;margin-top:14px;font-size:12px;font-weight:700;
+    background:var(--accent,var(--red));color:#fff;
+    padding:3px 12px;border-radius:20px;
+}
+.card a{color:#ffd34d;word-break:break-all}
+
+/* Character themes (CSS only. Add your own images through the --img-* variables) */
+.ironman{--accent:#f5b301;--theme:var(--img-ironman),linear-gradient(135deg,#8c0f12 0%,#c8161d 45%,#f5b301 100%)}
+.cap{--accent:#2e6bff;--theme:var(--img-cap),
+    radial-gradient(circle at 80% 25%,#fff 0 6%,transparent 6.5%),
+    repeating-linear-gradient(90deg,#b3121a 0 22px,#fff 22px 44px),
+    linear-gradient(135deg,#0d2b6b,#1f4fc4)}
+.cap{--theme:var(--img-cap),radial-gradient(circle at 78% 28%,#fff 0 7%,transparent 7.5%),linear-gradient(135deg,#0d2b6b 0%,#1f4fc4 55%,#b3121a 100%)}
+.panther{--accent:#a45cff;--theme:var(--img-panther),linear-gradient(135deg,#050505 0%,#2a1450 55%,#7a3fd1 100%)}
+.spidey{--accent:#ec1d24;--theme:var(--img-spidey),
+    repeating-radial-gradient(circle at 100% 0,transparent 0 24px,rgba(255,255,255,.18) 25px 26px),
+    linear-gradient(135deg,#b3121a,#1a3a9c)}
+.hulk{--accent:#4cd137;--theme:var(--img-hulk),linear-gradient(135deg,#0c3b14 0%,#2f8f2f 55%,#6a2c91 100%)}
+.thor{--accent:#4fc3ff;--theme:var(--img-thor),linear-gradient(135deg,#0a1230 0%,#1b3a8a 50%,#4fc3ff 100%)}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;perspective:1000px;
+}
+
+/* ---------- Skills ---------- */
+.bar{width:100%;height:12px;background:#333;border-radius:20px;margin:8px 0 22px;overflow:hidden}
+.bar div{
+    height:100%;width:0;border-radius:20px;
+    background:linear-gradient(90deg,var(--red),#ffd34d);
+    transition:width 1.4s cubic-bezier(.2,.8,.2,1);
+}
+
+/* ---------- Scroll reveal ---------- */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .7s, transform .7s}
+.reveal.show{opacity:1;transform:none}
+
+footer{
+    text-align:center;padding:30px;background:#000;color:#bbb;
+    border-top:3px solid var(--red);
+}
+
+@media (max-width:700px){
+    nav a{margin-left:14px;font-size:14px}
+    .logo{font-size:26px}
+}
+
+@media (prefers-reduced-motion:reduce){
+    *,*::before{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+    .bar div{width:var(--w)!important}
+}
+</style>
+</head>
+
+<body>
+<div id="progress"></div>
+
+<header>
+    <div class="logo">Harivishal</div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<section class="hero" id="home">
+    <h1>Hello, I'm <span>Harivishal</span></h1>
+    <p>
+        Computer Applications student passionate about creating modern,
+        responsive and attractive websites using HTML, CSS, PHP, generative AI and JavaScript.
+    </p>
+    <a href="#projects" class="btn">View My Work</a>
+</section>
+
+<section id="about">
+    <h2 class="section-title reveal">About Me</h2>
+    <div class="card ironman reveal tilt">
+        <h3 style="margin-bottom:20px;">Who Am I?</h3>
+        <p style="line-height:1.9;color:#e6e6e6;">
+            I am <strong>Harivishal</strong>, a Computer Applications student who loves creating modern and responsive websites.
+            I enjoy learning new web technologies and improving my design skills every day.
+            My goal is to become a professional Web Developer and create high-quality websites for clients and businesses.
+        </p>
+    </div>
+</section>
+
+<section id="projects">
+    <h2 class="section-title reveal">My Projects</h2>
+    <div class="grid">
+
+        <div class="card cap reveal tilt">
+            <h3>FitBuddy AI Planner</h3>
+            <p style="margin-top:15px;color:#e0e0e0;line-height:1.8;">
+                An AI planner web app. Enter your details and get a seven-day workout plan.
+                <a href="https://fitbuddy-d0ax.onrender.com" target="_blank" rel="noopener">Open FitBuddy</a>
+            </p>
+            <span class="tag">AI Web App</span>
+        </div>
+
+        <div class="card spidey reveal tilt">
+            <h3>Portfolio Website</h3>
+            <p style="margin-top:15px;color:#e0e0e0;line-height:1.8;">
+                A responsive personal portfolio website showcasing my skills, projects and contact information.
+            </p>
+            <span class="tag">HTML / CSS / JS</span>
+        </div>
+
+        <div class="card panther reveal tilt">
+            <h3>real estate</h3>
+            <p style="margin-top:15px;color:#e0e0e0;line-height:1.8;">
+                A creative landing page built with modern UI design and responsive layout.
+            </p>
+            <span class="tag">UI Design</span>
+        </div>
+
+        <div class="card hulk reveal tilt">
+            <h3>EDUGenie AI</h3>
+            <p style="margin-top:15px;color:#e0e0e0;line-height:1.8;">
+                Get answers to your questions, topic explanations and project help.
+                <a href="https://edugenie.onrender.com" target="_blank" rel="noopener">Open EDUGenie</a>
+            </p>
+            <span class="tag">AI Web App</span>
+        </div>
+
+        <div class="card thor reveal tilt">
+            <h3>LegalEase</h3>
+            <p style="margin-top:15px;color:#e0e0e0;line-height:1.8;">
+                Enter your document details and generate any type of document.
+                <a href="https://legalase.onrender.com/docs" target="_blank" rel="noopener">Open LegalEase</a>
+            </p>
+            <span class="tag">AI Web App</span>
+        </div>
+
+        <div class="card ironman reveal tilt">
+            <h3>ComicCraft</h3>
+            <p style="margin-top:15px;color:#e0e0e0;line-height:1.8;">
+                Create your own comic in this web app.
+                <a href="https://comiccraft-3.onrender.com/" target="_blank" rel="noopener">Open ComicCraft</a>
+            </p>
+            <span class="tag">AI Web App</span>
+        </div>
+
+    </div>
+</section>
+
+<section id="experience">
+    <h2 class="section-title reveal">Experience</h2>
+    <div class="card panther reveal tilt">
+        <h3>Student Web Developer</h3>
+        <p style="margin-top:15px;color:#e0e0e0;line-height:1.8;">
+            Currently learning and developing websites using HTML, CSS and JavaScript.
+            Focused on creating responsive, user-friendly and visually attractive websites.
+        </p>
+    </div>
+</section>
+
+<section id="skills">
+    <h2 class="section-title reveal">My Skills</h2>
+    <div class="card cap reveal">
+        <p>HTML</p><div class="bar"><div data-w="95" style="--w:95%"></div></div>
+        <p>CSS</p><div class="bar"><div data-w="80" style="--w:80%"></div></div>
+        <p>JavaScript</p><div class="bar"><div data-w="60" style="--w:60%"></div></div>
+        <p>PHP</p><div class="bar" style="margin-bottom:0"><div data-w="55" style="--w:55%"></div></div>
+    </div>
+</section>
+
+<section id="contact">
+    <h2 class="section-title reveal">Contact Me</h2>
+    <div class="card thor reveal tilt">
+        <p style="margin-bottom:15px;"><b>Name:</b> Harivishal</p>
+        <p style="margin-bottom:15px;"><b>Email:</b> ms.harivishalb2007@email.com</p>
+        <p style="margin-bottom:15px;"><b>Phone:</b> +91 9092465501</p>
+        <p>Feel free to contact me for website design and web development projects.</p>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 Harivishal. All Rights Reserved.</p>
+</footer>
+
+<script>
+/* smooth nav scroll */
+document.querySelectorAll("nav a, .btn").forEach(link=>{
+    link.addEventListener("click",function(e){
+        const target=document.querySelector(this.getAttribute("href"));
+        if(target){e.preventDefault();target.scrollIntoView({behavior:"smooth"});}
+    });
+});
+
+/* reveal on scroll + animate skill bars */
+const io=new IntersectionObserver(entries=>{
+    entries.forEach(en=>{
+        if(!en.isIntersecting) return;
+        en.target.classList.add("show");
+        en.target.querySelectorAll(".bar div").forEach(b=>b.style.width=b.dataset.w+"%");
+        io.unobserve(en.target);
+    });
+},{threshold:.15});
+document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+
+/* scroll progress bar */
+const bar=document.getElementById("progress");
+addEventListener("scroll",()=>{
+    const h=document.documentElement;
+    bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100+"%";
+},{passive:true});
+
+/* 3D tilt on cards (mouse devices only) */
+if(matchMedia("(hover:hover)").matches && !matchMedia("(prefers-reduced-motion:reduce)").matches){
+    document.querySelectorAll(".tilt").forEach(card=>{
+        card.addEventListener("mousemove",e=>{
+            const r=card.getBoundingClientRect();
+            const x=(e.clientX-r.left)/r.width-.5;
+            const y=(e.clientY-r.top)/r.height-.5;
+            card.style.transform=`rotateY(${x*10}deg) rotateX(${-y*10}deg) translateY(-6px)`;
+        });
+        card.addEventListener("mouseleave",()=>{card.style.transform="";});
+    });
+}
+</script>
+</body>
+</html>
